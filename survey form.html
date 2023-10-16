@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <title>Application Form</title>
+<style>
+div{
+	width:40%;
+	background:#3333ff;
+	color:white;
+	margin:auto;
+	padding:20px;
+	box-shadow:2px 2px 15px pink;
+	border-radius:15px;
+}
+
+h2{
+	font-size:26px;
+	text-align:center;
+	color:white;
+	text-decoration:2px blue underline;
+}
+
+span{
+	color:red;
+}
+
+
+label,span{
+	font-size:20px;
+}
+
+[type="text"],[type="date"],[type="email"],label{
+		width:300px;
+		height:30px;
+		border:2px red;
+		outline:none;
+		padding-left:10px;
+		padding-right:10px;
+}
+
+[type="button"]{
+	text-align:center;
+	width:100px;
+}
+
+
+button{
+	width:80px;
+	text-align:center;
+	color:white;
+	background:linear-gradient(to left,black,blue);
+	border:none;
+	border-radius:5px;
+	transition:2s;
+}
+
+button:hover{						
+	cursor:pointer;
+	background:linear-gradient(to right,black,blue);
+	border-radius:15px;
+}
+
+input{
+	accent-color:red;
+}
+</style>
+
+ </head>
+ <body>
+ <div background:>
+ 	<h2>Survey Form</h2>
+	<form action="appserver.html" method="get" autocomplete="off">
+	<p>
+		<label>First Name</label><span>*</span><br>
+		<input type="text" id="fn" name="fn" required>
+	</p>
+
+		<p>
+		<label>Last Name</label><span>*</span><br>
+		<input type="text" id="fn" name="fn" required>
+	</p>
+
+	<p>
+		<label>Mobile Number</label><span>*</span><br>
+		<input type="text" id="mn" name="mn" required maxlength="10">
+	</p>
+
+	<p>
+		<label>Email</label><span>*</span><br>
+		<input type="email" id="mid" name="mid" required>
+	</p>
+
+	<p>
+		<label>Date of birth</label><br>
+		<input type="date">
+	</p>
+    
+            <label for="country">Country:</label>
+            <select id="country" required>
+                <option value="">Select a country</option>
+                <option value="us">United States</option>
+                <option value="ca">Canada</option>
+                <!-- Add more countries here -->
+            </select>
+
+            <p>
+            <label>gender:</label><br>
+			<input type="radio" id="g1" name="gender" value="m"><label>male</label>
+			<input type="radio" id="g2" name="gender" value="f"><label>female</label>
+			<input type="radio" id="g3" name="gender" value="o"><label>other</label></p>
+            
+           
+            
+            <button type="button" onclick="submitForm()">Submit</button>
+            <button type="button" onclick="resetForm()">Reset</button>
+        </form>
+    </div>
+
+    <script>
+        function submitForm() {
+            // Validation
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const dob = document.getElementById('dob').value;
+            const country = document.getElementById('country').value;
+            const gender = [...document.querySelectorAll('input[name="gender"]:checked')].map(input => input.value);
+            const profession = document.getElementById('profession').value;
+            const email = document.getElementById('email').value;
+            const mobile = document.getElementById('mobile').value;
+
+            if (!firstName || !lastName || !dob || !country || gender.length === 0 || !profession || !email || !mobile) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Build and display the confirmation message
+            const message = `
+                First Name: ${firstName}
+                Last Name: ${lastName}
+                Date of Birth: ${dob}
+                Country: ${country}
+                Gender: ${gender.join(', ')}
+                Profession: ${profession}
+                Email: ${email}
+                Mobile Number: ${mobile}
+            `;
+
+            alert('You have submitted the following information:\n\n' + message);
+
+            // Reset the form
+            resetForm();
+        }
+
+        function resetForm() {
+            document.getElementById('survey-form').reset();
+        }
+    </script>
+</body>
+</html>
+
